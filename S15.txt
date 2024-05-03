@@ -1,0 +1,107 @@
+#1a
+import math 
+def calculate_area(x1, y1, x2, y2, x3, y3): 
+ """Function to calculate area of a triangle given its three vertices.""" 
+ area = abs((x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) / 2) 
+ return area 
+Ax, Ay = 0, 0 
+Bx, By = 5, 0 
+Cx, Cy = 3, 3 
+area = calculate_area(Ax, Ay, Bx, By, Cx, Cy) 
+print("Area of triangle ABC is:", area) 
+
+#1c
+import numpy as np
+import matplotlib.pyplot as plt
+def f(x):
+ """Function to define f(x)."""
+ if -10 < x < 5:
+ return x**2 + 4
+ elif 5 <= x:
+return 3*x + 9
+ else:
+ return None
+x = np.linspace(-11, 11, 500) # Generate 500 points between -11 and 11
+y = np.array([f(xi) for xi in x])
+plt.plot(x, y, label='f(x)')
+plt.xlabel('x')
+plt.ylabel('f(x)')
+plt.title('Graph of f(x)')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+#2a
+import numpy as np
+A = np.array([2, 1])
+B = np.array([2, -2])
+C = np.array([-1, 2])
+rotation_matrix = np.array([[-1, 0],[0, -1]])
+A_rotated = np.dot(rotation_matrix, A)
+B_rotated = np.dot(rotation_matrix, B)
+C_rotated = np.dot(rotation_matrix, C)
+print("Original Triangle Vertices:")
+print("A:", A)
+print("B:", B)
+print("C:", C)
+print("Rotated Triangle Vertices:")
+print("A Rotated:", A_rotated)
+print("B Rotated:", B_rotated)
+print("C Rotated:", C_rotated)
+
+#2b
+import numpy as np
+import matplotlib.pyplot as plt
+def f(x):
+ return np.exp(x)
+x = np.linspace(-10, 10, 500)
+y = f(x)
+plt.plot(x, y, label='f(x) = e**x')
+plt.xlabel('x')
+plt.ylabel('f(x)')
+plt.title('Graph of f(x) = e**x')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+#3a1
+from pulp import *
+problem = LpProblem("Maximize Z", LpMaximize)
+x = LpVariable('x', lowBound=0) # x >= 0
+y = LpVariable('y', lowBound=0) # y >= 0
+problem += 3.5 * x + 2 * y
+problem += x + y >= 5
+problem += x >= 4
+problem += y <= 5
+status = problem.solve()
+if status == 1:
+ print("Optimal solution:")
+ print(f"x = {value(x)}")
+print(f"y = {value(y)}")
+ print(f"Z = {value(problem.objective)}")
+else:
+ print("No feasible solution found.")
+
+3b2
+import numpy as np
+P = np.array([-2, 4])
+print("Original Point:")
+print("Point P: ({}, {})".format(P[0], P[1]))
+reflection_matrix = np.array([[0, 1], [1, 0]]) 
+P_reflection = np.dot(reflection_matrix, P)
+print("\nPoint after Reflection:")
+print("Point P: ({}, {})".format(P_reflection[0], P_reflection[1]))
+scaling_matrix = np.array([[1, 0], [0, 1.5]]) 
+P_scaling = np.dot(scaling_matrix, P_reflection)
+print("\nPoint after Scaling:")
+print("Point P: ({}, {})".format(P_scaling[0], P_scaling[1]))
+shearing_matrix = np.array([[1, 2], [0, 1]]) 
+P_shearing = np.dot(shearing_matrix, P_scaling)
+print("\nPoint after Shearing:")
+print("Point P: ({}, {})".format(P_shearing[0], P_shearing[1]))
+theta = np.deg2rad(45)
+rotation_matrix = np.array([[np.cos(theta), -np.sin(theta)], [np.sin(theta), 
+np.cos(theta)]]) 
+P_rotation = np.dot(rotation_matrix, P_shearing)
+print("\nPoint after Rotation:")
+print("Point P: ({}, {})".format(P_rotation[0], P_rotation[1]))

@@ -1,0 +1,91 @@
+#1b
+import numpy as np
+import matplotlib.pyplot as plt
+x = np.linspace(0, 2*np.pi, 500)
+y = np.cos(x)
+plt.plot(x, y)
+plt.xlabel('x')
+plt.ylabel('f(x) = cos(x)')
+plt.title('Graph of f(x) = cos(x)')
+plt.grid(True)
+plt.show()
+
+#1c
+import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+x = np.linspace(-10, 10, 100)
+y = np.linspace(-10, 10, 100)
+X, Y = np.meshgrid(x, y)
+Z = np.sin(X) + np.cos(Y)
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+ax.plot_surface(X, Y, Z)
+ax.set_xlabel('x')
+ax.set_ylabel('y')
+ax.set_zlabel('z')
+ax.set_title('3D Plot of z = sin(x) + cos(y)')
+plt.show()
+
+#2b
+import matplotlib.pyplot as plt
+vertex1 = (0, 0)
+vertex2 = (4, 0)
+vertex3 = (1, 4)
+plt.plot(*zip(vertex1, vertex2, vertex3, vertex1), marker='o')
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.title('Triangle')
+plt.grid(True)
+plt.show()
+
+#2c
+import numpy as np
+A = np.array([0, 0])
+B = np.array([6, 0])
+C = np.array([4, 4])
+AB = np.linalg.norm(B - A)
+BC = np.linalg.norm(C - B)
+CA = np.linalg.norm(A - C)
+s = (AB + BC + CA) / 2
+area = np.sqrt(s * (s - AB) * (s - BC) * (s - CA))
+perimeter = AB + BC + CA
+print("Triangle ABC:")
+print("Side AB:", AB)
+print("Side BC:", BC)
+print("Side CA:", CA)
+print("Area:", area)
+print("Perimeter:", perimeter)
+
+#3a1
+from pulp import *
+problem = LpProblem("LPP", LpMaximize)
+x = LpVariable('x', lowBound=0, cat='Continuous')
+y = LpVariable('y', lowBound=0, cat='Continuous')
+problem += 150 * x + 75 * y, "Z"
+problem += 4 * x + 6 * y <= 24, "Constraint1"
+problem += 5 * x + 3 * y <= 15, "Constraint2"
+problem.solve()
+print("Status:", LpStatus[problem.status])
+print("Optimal x =", value(x))
+print("Optimal y =", value(y))
+print("Optimal Z =", value(problem.objective
+
+#3b1
+import numpy as np
+P = np.array([4, -2])
+P_reflect_y = np.array([-P[0], P[1]])
+P_scale_x = np.array([5 * P[0], P[1]])
+angle = np.pi / 2
+P_rotate = np.array([P[0] * np.cos(angle) - P[1] * np.sin(angle), P[0] * 
+np.sin(angle) + P[1] * np.cos(angle)])
+shearing_factor = 7 / 2
+P_shear_x = np.array([P[0] + shearing_factor * P[1], P[1]])
+print("Initial point P:", P)
+print("Reflection through Y-axis:", P_reflect_y)
+print("Scaling in X-coordinate by factor 5:", P_scale_x)
+print("Rotation about origin through an angle pi/2:", P_rotate)
+print("Shearing in X-direction by 7/2 units:", P_shear_x)
+
+
+

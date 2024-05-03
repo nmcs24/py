@@ -1,0 +1,94 @@
+#1a
+import matplotlib.pyplot as plt 
+import numpy as np 
+x = np.linspace(-6, 6, 100) 
+y = np.linspace(-6, 6, 100) 
+X, Y = np.meshgrid(x, y) 
+Z = X**2 + Y**2 
+fig = plt.figure() 
+ax = fig.add_subplot(111, projection='3d') 
+ax.plot_surface(X, Y, Z, cmap='viridis') 
+ax.set_xlabel('X-axis') 
+ax.set_ylabel('Y-axis') 
+ax.set_zlabel('Z-axis') 
+ax.set_title('3D Surface Plot of z = x^2 + y^2') 
+plt.show() 
+
+#1b
+import matplotlib.pyplot as plt
+import numpy as np
+x = np.linspace(-5, 5, 100)
+y = np.linspace(-5, 5, 100)
+X, Y = np.meshgrid(x, y)
+Z = np.log(X**2 * Y**2)
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+ax.contour(X, Y, Z, cmap='Greens')
+ax.set_xlabel('X-axis')
+ax.set_ylabel('Y-axis')
+ax.set_zlabel('f(x, y)')
+ax.set_title('3D Contour Plot of f(x, y) = log(x^2 * y^2)')
+plt.show()
+
+#2c
+import matplotlib.pyplot as plt
+import numpy as np
+vertices = np.array([[0, 0], [1, 0], [2, 2], [1, 4], [0, 0]])
+x = vertices[:, 0]
+y = vertices[:, 1]
+fig, ax = plt.subplots()
+ax.plot(x, y, 'b', label='Polygon')
+area = 0.5 * np.abs(np.dot(x, np.roll(y, 1)) - np.dot(y, np.roll(x, 1)))
+perimeter = np.sum(np.sqrt(np.diff(x) ** 2 + np.diff(y) ** 2))
+print("Area of the polygon: ", area)
+print("Perimeter of the polygon: ", perimeter)
+ax.set_xlabel('X-axis')
+ax.set_ylabel('Y-axis')
+ax.set_title('Polygon with Vertices (0, 0), (1, 0), (2, 2), (1, 4)')
+ax.legend()
+plt.grid(True)
+plt.show()
+
+#3a1
+from pulp import *
+lp_problem = LpProblem("Linear_Programming_Problem", 
+LpMaximize)
+x = LpVariable('x', lowBound=0, cat='Continuous')
+y = LpVariable('y', lowBound=0, cat='Continuous')
+z = LpVariable('z', lowBound=0, cat='Continuous')
+w = LpVariable('w', lowBound=0, cat='Continuous')
+lp_problem += 4*x + y + 3*z + 5*w
+lp_problem += 4*x + 6*y - 5*z - 4*w >= -20
+lp_problem += -8*x - 3*y + 3*z + 2*w <= 5
+lp_problem += x >= 0
+lp_problem += y >= 0
+lp_problem.solve()
+print("Status: ", LpStatus[lp_problem.status])
+print("Optimal Values:")
+print("x = ", x.varValue)
+print("y = ", y.varValue)
+print("z = ", z.varValue)
+print("w = ", w.varValue)
+print("Optimal Objective Function Value = ", lpSum([4*x, y, 3*z, 
+5*w]).getValue())
+
+#3b1
+import numpy as np
+P = np.array([2, -3])
+reflection_X = np.array([[1, 0],[0, -1]]) 
+P_reflection_X = np.dot(reflection_X, P)
+scaling_Y = np.array([[1, 0],[0, 1.5]])
+P_scaling_Y = np.dot(scaling_Y, P)
+shearing_XY = np.array([[1, -2],[4, 1]]) 
+P_shearing_XY = np.dot(shearing_XY, P)
+angle = np.deg2rad(30)
+rotation = np.array([[np.cos(angle), -np.sin(angle)],[np.sin(angle), 
+np.cos(angle)]])
+P_rotation = np.dot(rotation, P)
+print("Original Point P:", P)
+print("Result after reflection through X-axis:", P_reflection_X)
+print("Result after scaling in Y-coordinate by factor 1.5:", P_scaling_Y)
+print("Result after shearing in both X and Y direction by -2 and 4 units 
+respectively:", P_shearing_XY)
+print("Result after rotation about origin by an angle of 30 degrees:", P_rotation)
+

@@ -1,0 +1,90 @@
+#1a
+import numpy as np 
+import matplotlib.pyplot as plt 
+x = np.linspace(-2 * np.pi, 2 * np.pi, 1000) 
+f_x = np.sin(x) 
+g_x = np.cos(x) 
+fig, ax = plt.subplots() 
+ax.plot(x, f_x, label='f(x) = sin(x)') 
+ax.plot(x, g_x, label='g(x) = cos(x)') 
+ax.set_title('Graph of f(x) = sin(x) and g(x) = cos(x)') 
+ax.set_xlabel('x') 
+ax.set_ylabel('y') 
+ax.legend() 
+plt.show() 
+
+#1b
+import numpy as np
+import matplotlib.pyplot as plt
+def f(x):
+ return np.exp(x) * np.sin(x)
+x = np.linspace(-5*np.pi, 5*np.pi, 500)
+y = f(x)
+plt.plot(x, y, 'b^-', linewidth=1, markersize=4)
+plt.xlabel('x')
+plt.ylabel('f(x)')
+plt.title('2D Graph of f(x) = e^(x) * sin(x)')
+plt.show()
+
+#2b1
+import numpy as np
+import matplotlib.pyplot as plt
+A = np.array([-5, 2])
+B = np.array([3, -4])
+m = 2 # slope of the reflection line
+c = -1 # y-intercept of the reflection line
+midpoint = (A + B) / 2
+direction = np.array([1, m])
+projection = (2 * midpoint.dot(direction) - 2 * c * direction) / (1 + m**2)
+reflected_A = midpoint + (projection - midpoint)
+reflected_B = midpoint - (projection - midpoint)
+plt.plot([A[0], B[0]], [A[1], B[1]], 'bo-', label='Original Line Segment AB')
+plt.plot([reflected_A[0], reflected_B[0]], [reflected_A[1], reflected_B[1]], 'ro-', 
+label='Reflected Line Segment A\'B\'')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.legend()
+plt.title('Reflection of Line Segment AB through y = 2x - 1')
+plt.grid()
+plt.show()
+
+
+#3a1
+import numpy as np
+from scipy.optimize import linprog
+c = [-3.5, -2]
+A = [[-1, -1], [-1, 0], [0, 1]]
+b = [-5, -4, 2]
+x_bounds = (0, None)
+y_bounds = (0, None)
+result = linprog(c, A_ub=A, b_ub=b, bounds=[x_bounds, y_bounds])
+if result.success:
+ print("Optimal solution found:")
+ print("x =", result.x[0])
+ print("y =", result.x[1])
+ print("Maximum value of Z =", -result.fun)
+else:
+ print("Optimal solution not found.")
+
+
+#3b1
+import numpy as np
+P = np.array([3, -2])
+scaling_matrix = np.array([[1, 0], [0, 4]])
+P_scaled_y = np.dot(scaling_matrix, P)
+print("After Scaling in y direction by 4 units:")
+print("Point P_scaled_y:", P_scaled_y)
+reflection_y_axis_matrix = np.array([[-1, 0], [0, 1]])
+P_reflected_y_axis = np.dot(reflection_y_axis_matrix, P)
+print("After Reflection through y axis:")
+print("Point P_reflected_y_axis:", P_reflected_y_axis)
+angle_rad = np.deg2rad(45) # Convert angle to radians
+rotation_matrix = np.array([[np.cos(angle_rad), -np.sin(angle_rad)], 
+[np.sin(angle_rad), np.cos(angle_rad)]])
+P_rotated = np.dot(rotation_matrix, P)
+print("After Rotation about origin by angle 45 degrees:")
+print("Point P_rotated:", P_rotated)
+reflection_line_matrix = np.array([[0, 1], [1, 0]])
+P_reflected_line = np.dot(reflection_line_matrix, P)
+print("After Reflection through the line y = x:")
+print("Point P_reflected_line:", P_reflected_line)

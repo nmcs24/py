@@ -1,0 +1,100 @@
+#1b
+import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+x = np.linspace(10, 20, 500)
+y = np.sin(2 * x)
+z = x
+x = np.cos(2 * x)
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+ax.plot(x, y, z, color='red')
+ax.set_title("3D Line Graph: (cos(2x), sin(2x), x)")
+ax.set_xlabel('X')
+ax.set_ylabel('Y')
+ax.set_zlabel('Z')
+plt.show()
+
+#1c
+import matplotlib.pyplot as plt 
+left = [1,2,3,4,5]
+height = [600,4000,200,1500,]
+tick_label=[‘clothing’,’food’,’rent’,’petrol’,’Misc’]
+plt.bar (left,height,tick_label = tick_label,width = 0.8 ,color = ['green','green'])
+plt.xlabel('Item')
+plt.ylabel('Expenditure')
+plt. show()
+
+#2a
+import numpy as np
+A = np.array([1, 1])
+B = np.array([2, -2])
+C = np.array([1, 2])
+angle = np.radians(90)
+rotation_matrix = np.array([[np.cos(angle), -np.sin(angle)],
+ [np.sin(angle), np.cos(angle)]])
+A_rotated = np.dot(rotation_matrix, A)
+B_rotated = np.dot(rotation_matrix, B)
+C_rotated = np.dot(rotation_matrix, C)
+print("Rotated Point A: ", A_rotated)
+print("Rotated Point B: ", B_rotated)
+print("Rotated Point C: ", C_rotated)
+
+#2c
+import numpy as np
+A = np.array([0, 0])
+B = np.array([5, 0])
+C = np.array([3, 3])
+AB = np.linalg.norm(B - A)
+BC = np.linalg.norm(C - B)
+CA = np.linalg.norm(A - C)
+s = (AB + BC + CA) / 2
+area = np.sqrt(s * (s - AB) * (s - BC) * (s - CA))
+perimeter = AB + BC + CA
+print("Triangle ABC:")
+print("Side AB:", AB)
+print("Side BC:", BC)
+print("Side CA:", CA)
+print("Area:", area)
+print("Perimeter:", perimeter)
+
+#3a1
+from pulp import *
+prob = LpProblem("Maximization Problem", LpMaximize)
+x = LpVariable('x', lowBound=0, cat='Continuous')
+y = LpVariable('y', lowBound=0, cat='Continuous')
+prob += x + y, "Z"
+prob += x - y >= 1
+prob += x + y >= 2
+prob.solve()
+print("Status: ", LpStatus[prob.status])
+if prob.status == LpStatusOptimal:
+ print("Optimal Solution:")
+ print("x = ", value(x))
+ print("y = ", value(y))
+ print("Z = ", value(prob.objective))
+
+#3b1
+import numpy as np
+P = np.array([-2, 4])
+shearing_matrix_1 = np.array([[1, 0],
+ [0, 1]])
+shearing_matrix_1[0, 1] = 7
+P_sheared_1 = np.dot(shearing_matrix_1, P)
+scaling_matrix = np.array([[3/2, 0],
+ [0, 4]])
+P_scaled = np.dot(scaling_matrix, P)
+shearing_matrix_2 = np.array([[1, 0],
+ [0, 1]])
+shearing_matrix_2[0, 1] = 4
+shearing_matrix_2[1, 0] = 2
+P_sheared_2 = np.dot(shearing_matrix_2, P)
+angle = np.radians(45)
+rotation_matrix = np.array([[np.cos(angle), -np.sin(angle)],
+ [np.sin(angle), np.cos(angle)]])
+P_rotated = np.dot(rotation_matrix, P)
+print("Original Point: ", P)
+print("Sheared in Y direction by 7 units: ", P_sheared_1)
+print("Scaled in X and Y direction by 3/2 and 4 units respectively: ", P_scaled)
+print("Sheared in X and Y direction by 2 and 4 units respectively: ", P_sheared_2)
+print("Rotated about origin by an angle of 45 degrees: ", P_rotated)

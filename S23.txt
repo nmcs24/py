@@ -1,0 +1,92 @@
+#1a
+import numpy as np 
+import matplotlib.pyplot as plt 
+x = np.linspace(0, np.pi, 100) 
+sin_x = np.sin(x) 
+cos_x = np.cos(x) 
+fig, axs = plt.subplots(2, 1, figsize=(8, 6)) 
+axs[0].plot(x, sin_x, label='sin(x)') 
+axs[0].set_title('sin(x)') 
+axs[0].legend() 
+axs[1].plot(x, cos_x, label='cos(x)') 
+axs[1].set_title('cos(x)') 
+axs[1].legend() 
+fig.suptitle('Graph of sin(x) and cos(x)') 
+plt.tight_layout()
+plt.show()
+
+#1b
+import numpy as np
+import matplotlib.pyplot as plt
+np.random.seed(0)
+x_vals = np.random.uniform(-1, 1, size=30)
+y_vals = np.random.uniform(-1, 1, size=30)
+x, y = np.meshgrid(np.linspace(-1, 1, 100), np.linspace(-1, 1, 100))
+z = np.cos(np.abs(x) + np.abs(y))
+for i in range(30):
+ fig = plt.figure()
+ ax = fig.add_subplot(111, projection='3d')
+ax.plot_surface(x, y, z, cmap='viridis')
+ ax.set_xlabel('X')
+ ax.set_ylabel('Y')
+ ax.set_zlabel('Z')
+ ax.set_title(f'Surface Plot {i+1}: z = cos(|x| + |y|) for x = {x_vals[i]:.2f}, y = 
+{y_vals[i]:.2f}')
+ plt.show()
+
+#2c
+import math
+A = [0, 1]
+B = [-5, 0]
+C = [-3, 3]
+formula
+AB = math.sqrt((B[0] - A[0])**2 + (B[1] - A[1])**2)
+BC = math.sqrt((C[0] - B[0])**2 + (C[1] - B[1])**2)
+AC = math.sqrt((C[0] - A[0])**2 + (C[1] - A[1])**2)
+perimeter = AB + BC + AC
+s = perimeter / 2 # Semi-perimeter of the triangle
+area = math.sqrt(s * (s - AB) * (s - BC) * (s - AC))
+print("Area of triangle ABC:", area)
+print("Perimeter of triangle ABC:", perimeter)
+
+#3a1
+mport numpy as np
+from scipy.optimize import linprog
+c = [-3, -5, -4] # Coefficients of x, y, z in the objective function
+A = [
+ [2, 3, 0], # Coefficients of x, y, z in the first inequality constraint
+ [2, 5, 0], # Coefficients of x, y, z in the second inequality constraint
+ [3, 2, 4] # Coefficients of x, y, z in the third inequality constraint
+]
+b = [8, 10, 15] # Right-hand side values of the inequality constraints
+x_bounds = (0, None) # x >= 0
+y_bounds = (0, None) # y >= 0
+z_bounds = (0, None) # z >= 0
+res = linprog(c, A_ub=A, b_ub=b, bounds=[x_bounds, y_bounds, 
+z_bounds], method='simplex')
+x = res.x[0] # Value of x that maximizes the objective function
+y = res.x[1] # Value of y that maximizes the objective function
+z = res.x[2] # Value of z that maximizes the objective function
+max_z = -res.fun # Maximum value of the objective function (negation 
+due to maximization)
+print("Optimal solution:")
+print("x =", x)
+print("y =", y)
+print("z =", z)
+print("Max Z =", max_z)
+
+#3b1
+import math
+point = (3, -1)
+print("Initial point:", point)
+reflection_x = (point[0], -point[1])
+print("Reflection through X axis:", reflection_x)
+angle = math.radians(30)
+rotation = (point[0] * math.cos(angle) - point[1] * math.sin(angle), point[0] * 
+math.sin(angle) + point[1] * math.cos(angle))
+print("Rotation about origin by 30 degrees:", rotation)
+scaling_y = (point[0], point[1] * 8)
+print("Scaling in Y coordinate by factor 8:", scaling_y)
+shearing_x = (point[0] + 2 * point[1], point[1])
+print("Shearing in X direction by 2 units:", shearing_x)
+

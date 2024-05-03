@@ -1,0 +1,104 @@
+#1a
+import numpy as np 
+import matplotlib.pyplot as plt 
+x = np.linspace(0,10) 
+y = np.log10(x) 
+# Plot the graph 
+plt.plot(x, y) 
+plt.xlabel('x') 
+plt.ylabel('f(x) = log10(x)') 
+plt.title('2D Graph of f(x) = log10(x)') 
+plt.grid(True) 
+plt.show()
+
+#1b
+import numpy as np
+import matplotlib.pyplot as plt
+x = np.linspace(-1,1)
+y = 1/np.sin(x)
+# Plot the graph
+plt.plot(x, y)
+plt.xlabel('x')
+plt.ylabel('f(x) = sin-1(X)')
+plt.title('2D Graph of f(x) = log10(x)')
+plt.grid(True)
+plt.show()
+
+#2b
+import matplotlib.pyplot as plt
+import numpy as np
+vertices = np.array([[0, 0],
+ [2, 0],
+ [2, 3],
+ [1, 6],
+ [0, 0]])
+plt.plot(vertices[:, 0], vertices[:, 1], 'b-', label='Original Polygon')
+angle_rad = np.deg2rad(180)
+rotation_matrix = np.array([[np.cos(angle_rad), -np.sin(angle_rad)],
+ [np.sin(angle_rad), np.cos(angle_rad)]])
+vertices_rotated = np.dot(rotation_matrix, vertices.T).T
+plt.plot(vertices_rotated[:, 0], vertices_rotated[:, 1], 'r-', label='Rotated Polygon')
+plt.xlim(-7, 7)
+plt.ylim(-7, 7)
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.legend()
+plt.show()
+
+#2c
+import matplotlib.pyplot as plt
+import numpy as np
+x = np.array([2, 4])
+y = np.array([3, 3])
+m = (y[1] - y[0]) / (x[1] - x[0])
+b = y[0] - m * x[0]
+print(f"The equation of the line is: y = {m:.2f}x + {b:.2f}")
+plt.scatter(x, y, c='blue', label='Points')
+plt.plot(x, m * x + b, c='red', label='Line')
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.title('Line Passing through Points')
+plt.legend()
+plt.show()
+
+#3a1
+from pulp import *
+problem = LpProblem("LPP", LpMaximize)
+x = LpVariable('x', lowBound=0, cat='Continuous')
+y = LpVariable('y', lowBound=0, cat='Continuous')
+problem += 150 * x + 75 * y, "Z"
+problem += 4 * x + 6 * y <= 24, "Constraint1"
+problem += 5 * x + 3 * y <= 15, "Constraint2"
+problem.solve()
+print("Status:", LpStatus[problem.status])
+print("Optimal x =", value(x))
+print("Optimal y =", value(y))
+print("Optimal Z =", value(problem.objective
+
+#3b1
+import matplotlib.pyplot as plt
+import numpy as np
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+ax.set_xlabel('X-axis')
+ax.set_zlabel('Z-axis')
+points = {'(70, -25, 15)': (70, -25, 15),
+ '(50, 72, -45)': (50, 72, -45),
+ '(58, -82, 65)': (58, -82, 65),
+ '(20, 72, -45)': (20, 72, -45)}
+for label, (x, y, z) in points.items():
+ if label == '(70, -25, 15)':
+ ax.scatter(x, y, z, marker='D', color='black', label=label)
+ elif label == '(50, 72, -45)':
+ ax.scatter(x, y, z, marker='*', color='green', label=label)
+ elif label == '(58, -82, 65)':
+ ax.scatter(x, y, z, marker='.', color='green', label=label)
+ elif label == '(20, 72, -45)':
+ ax.scatter(x, y, z, marker='*', color='red', label=label)
+ax.legend()
+plt.show()
+
+
+
+
+

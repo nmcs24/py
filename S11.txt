@@ -1,0 +1,102 @@
+#1a
+import matplotlib.pyplot as plt 
+import numpy as np 
+fig = plt.figure() 
+ax = fig.add_subplot(111, projection='3d') 
+x = 70 
+y = -25
+z = 15 
+ax.plot([x], [y], [z], marker='D', color='black') 
+ax.set_xlabel('X-axis') 
+ax.set_ylabel('Y-axis') 
+ax.set_zlabel('Z-axis') 
+ax.set_xlim([0, 100]) 
+ax.set_ylim([-30, 30]) 
+ax.set_zlim([0, 20]) 
+plt.show()
+
+#1c
+import matplotlib.pyplot as plt 
+left = [1,2,3,4,5]
+height = [68,90,70,85,91]
+tick_label=['Maths','Science','English','Marathi',’Hindi']
+plt.bar (left,height,tick_label = tick_label,width = 0.8 ,color = ['green','green'])
+plt.xlabel('Item')
+plt.ylabel('Expenditure')
+plt. show()
+
+#2a
+import numpy as np
+A = np.array([1, 1])
+B = np.array([2, -2])
+C = np.array([1, 2])
+angle = np.radians(90)
+rotation_matrix = np.array([[np.cos(angle), -np.sin(angle)],
+ [np.sin(angle), np.cos(angle)]])
+A_rotated = np.dot(rotation_matrix, A)
+B_rotated = np.dot(rotation_matrix, B)
+C_rotated = np.dot(rotation_matrix, C)
+print("Rotated Point A: ", A_rotated)
+print("Rotated Point B: ", B_rotated)
+print("Rotated Point C: ", C_rotated)
+
+#2b
+import numpy as np
+reflection_line = 3
+A = np.array([1, 0])
+B = np.array([2, -2])
+C = np.array([-1, 2])
+Ap = np.array([A[0], 2 * reflection_line - A[1]])
+Bp = np.array([B[0], 2 * reflection_line - B[1]])
+Cp = np.array([C[0], 2 * reflection_line - C[1]])
+print("Original Points:")
+print("A: ", A)
+print("B: ", B)
+print("C: ", C)
+print("Reflected Points:")
+print("A':", Ap)
+print("B':", Bp)
+print("C':", Cp)
+
+#3a1
+from pulp import *
+prob = LpProblem("Maximization Problem", LpMaximize)
+x = LpVariable("x", lowBound=0, cat='Continuous')
+y = LpVariable("y", lowBound=0, cat='Continuous')
+prob += x + y, "Z"
+prob += x >= 6, "Constraint 1"
+prob += y >= 6, "Constraint 2"
+prob += x + y >= 11, "Constraint 3"
+prob.solve()
+print("Status:", LpStatus[prob.status])
+print("Optimal Solution:")
+print("x =", value(x))
+print("y =", value(y))
+print("Z =", value(prob.objective))
+
+
+#3b1
+import math
+point = (-2, 4)
+x, y = point
+point_reflection_x_axis = (x, -y)
+scale_factor = 6
+point_scaling_x = (x * scale_factor, y)
+shear_factor = 4
+point_shearing_x = (x + shear_factor * y, y)
+angle = 30
+angle_rad = math.radians(angle)
+point_rotation = (x * math.cos(angle_rad) - y * math.sin(angle_rad), x * 
+math.sin(angle_rad) + y * math.cos(angle_rad))
+print("Transformation 1: Reflection through x-axis")
+print("x =", point_reflection_x_axis[0])
+print("y =", point_reflection_x_axis[1])
+print("\nTransformation 2: Scaling in X-coordinate by 6 factor")
+print("x =", point_scaling_x[0])
+print("y =", point_scaling_x[1])
+print("\nTransformation 3: Shearing in x-direction by 4 units")
+print("x =", point_shearing_x[0])
+print("y =", point_shearing_x[1])
+print("\nTransformation 4: Rotation about origin through an angle of 30 degrees")
+print("x =", point_rotation[0])
+print("y =", point_rotation[1])

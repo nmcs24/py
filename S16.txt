@@ -1,0 +1,73 @@
+#1a
+import matplotlib.pyplot as plt 
+import numpy as np 
+def f(x, y): 
+ return -x**2 - y**2 
+x = np.linspace(-10, 10, 100) 
+y = np.linspace(-10, 10, 100) 
+X, Y = np.meshgrid(x, y) 
+Z = f(X, Y) 
+fig = plt.figure() 
+ax = fig.add_subplot(111, projection='3d') 
+ax.plot_surface(X, Y, Z, cmap='viridis') 
+ax.set_xlabel('X') 
+ax.set_ylabel('Y') 
+ax.set_zlabel('f(x, y)') 
+ax.set_title('Graph of f(x, y) = -x**2 - y**2') 
+plt.show()
+
+#1b
+import matplotlib.pyplot as plt
+import numpy as np
+def f(x):
+ return np.log(3 * x**2)
+x = np.linspace(1, 10, 100)
+y = f(x)
+plt.plot(x, y, 'o--', color='black', label='f(x) = log(3x^2)')
+plt.xlabel('x')
+plt.ylabel('f(x)')
+plt.title('Graph of f(x) = log(3x^2)')
+plt.legend()
+plt.show()
+
+
+#2a
+import math
+xA, yA = 0, 7
+xB, yB = 5, 2
+length = math.sqrt((xB - xA)**2 + (yB - yA)**2)
+midpoint_x = (xA + xB) / 2
+midpoint_y = (yA + yB) / 2
+print("The equation of the line passing through A and B is: ")
+print(f"y - {yA} = {(yB - yA) / (xB - xA)}(x - {xA})")
+print(f"Length of the line segment: {length}")
+print(f"Midpoint of the line segment: ({midpoint_x}, {midpoint_y})")
+
+#2c
+import numpy as np
+start = 0
+end = 15
+num_subintervals = 100
+x = np.linspace(start, end, num=num_subintervals+1)
+print("Generated vector x:")
+print(x)
+
+#3a1
+import numpy as np
+from scipy.optimize import linprog
+c = [-3.5, -2]
+A = [[-1, -1], [-1, 0], [0, 1]]
+b = [-5, -4, 2]
+x_bounds = (0, None)
+y_bounds = (0, None)
+result = linprog(c, A_ub=A, b_ub=b, bounds=[x_bounds, y_bounds])
+if result.success:
+ print("Optimal solution found:")
+ print("x =", result.x[0])
+ print("y =", result.x[1])
+ print("Maximum value of Z =", -result.fun)
+else:
+ print("Optimal solution not found.")
+
+
+	

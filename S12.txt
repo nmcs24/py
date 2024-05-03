@@ -1,0 +1,99 @@
+#1a
+import numpy as np 
+import matplotlib.pyplot as plt 
+def equation(x): 
+ return x**3 + 10*x - 5 
+x = np.linspace(-10, 10, 500) 
+y = equation(x) 
+plt.plot(x, y, color='red') 
+plt.title("Graph of y = x**3 + 10*x - 5") 
+plt.xlabel("x") 
+plt.ylabel("y") 
+plt.show() 
+
+#1c
+import numpy as np
+import matplotlib.pyplot as plt
+def f(x):
+ return x**2
+x = np.arange(-2, 2, 0.1)
+y = f(x)
+plt.plot(x, y, label='f(x) = x^2')
+plt.title('Graph of f(x) = x^2')
+plt.xlabel('x')
+plt.ylabel('f(x)')
+plt.legend()
+plt.show()
+
+#2a
+import math
+x1, y1 = 1, 0
+x2, y2 = 2, -1
+x1_rotated = -x1
+y1_rotated = -y1
+x2_rotated = -x2
+y2_rotated = -y2
+print("Original Endpoint 1: ({}, {})".format(x1, y1))
+print("Original Endpoint 2: ({}, {})".format(x2, y2))
+print("Rotated Endpoint 1: ({}, {})".format(x1_rotated, y1_rotated))
+print("Rotated Endpoint 2: ({}, {})".format(x2_rotated, y2_rotated))
+
+#2c
+import math
+X = [1, 2]
+Y = [2, -2]
+Z = [-1, 2]
+def distance(p1, p2):
+ return math.sqrt((p2[0] - p1[0]) ** 2 + (p2[1] - p1[1]) ** 2)
+XY = distance(X, Y)
+YZ = distance(Y, Z)
+XZ = distance(X, Z)
+perimeter = XY + YZ + XZ
+s = perimeter / 2
+area = math.sqrt(s * (s - XY) * (s - YZ) * (s - XZ))
+print("Length of XY: ", XY)
+print("Length of YZ: ", YZ)
+print("Length of XZ: ", XZ)
+print("Perimeter: ", perimeter)
+print("Area: ", area))
+
+#3a1
+from pulp import *
+prob = LpProblem("Linear Programming Problem", LpMaximize)
+x = LpVariable("x", lowBound=0)
+y = LpVariable("y", lowBound=0)
+objective = 3.5 * x + 2 * y
+prob += objective
+prob += x + y >= 5
+prob += x >= 4
+prob += y <= 2
+prob.solve()
+print("Status:", LpStatus[prob.status])
+print("Optimal Solution:")
+print("x =", value(x))
+print("y =", value(y))
+print("Optimal Objective Value: Z =", value(objective))
+
+#3b1
+x = -2
+y = 4
+print("Point after reflection through y-axis:")
+x = -x
+y = y
+print("x =", x)
+print("y =", y)
+print("\nPoint after scaling in X-coordinate by 6 factor:")
+x = x * 6
+y = y
+print("x =", x)
+print("y =", y)
+print("\nPoint after scaling in Y-coordinate by factor 4.1:")
+x = x
+y = y * 4.1
+print("x =", x)
+print("y =", y)
+print("\nPoint after shearing in X Direction by 7/2 units:")
+x = x + (7/2) * y
+y = y
+print("x =", x)
+print("y =", y)

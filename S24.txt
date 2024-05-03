@@ -1,0 +1,72 @@
+#1a
+import numpy as np 
+import matplotlib.pyplot as plt 
+def f(x): 
+ return np.exp(-x**2) 
+x = np.linspace(-5, 5, 100) 
+y = f(x) 
+fig = plt.figure() 
+ax = fig.add_subplot(111, projection='3d') 
+ax.plot(x, y, 'g--', marker='^', markersize=6) 
+ax.set_xlabel('X') 
+ax.set_ylabel('Y') 
+ax.set_zlabel('f(x)') 
+ax.set_title('3D Plot of f(x) = e^(-x^2)') 
+plt.show()
+
+#1b
+import numpy as np
+import matplotlib.pyplot as plt
+def f(x):
+ return np.log(3 * x**2)
+x = np.linspace(1, 10, 100)
+y = f(x)
+plt.plot(x, y, 'k--', marker='o', markersize=6)
+plt.xlabel('X')
+plt.ylabel('f(x)')
+plt.title('Plot of f(x) = log(3x^2)')
+plt.show()
+
+#2b
+import numpy as np
+n_subintervals = 80
+lower_bound = -22
+upper_bound = 22
+x = np.linspace(lower_bound, upper_bound, n_subintervals+1)
+print("Vector x:", x)
+
+#3a1
+from pulp import *
+problem = LpProblem("Maximize Z", LpMaximize)
+x = LpVariable('x', lowBound=0) # x >= 0
+y = LpVariable('y', lowBound=0) # y >= 0
+problem += 3.5 * x + 2 * y
+problem += x + y >= 5
+problem += x >= 4
+problem += y <= 5
+status = problem.solve()
+if status == 1:
+ print("Optimal solution:")
+ print(f"x = {value(x)}")
+print(f"y = {value(y)}")
+ print(f"Z = {value(problem.objective)}")
+else:
+ print("No feasible solution found.")
+
+#3b1
+import numpy as np
+point = np.array([3, -1])
+reflection_x = np.array([[1, 0], [0, -1]])
+point_reflection_x = np.dot(reflection_x, point)
+print("After reflection through X axis:", point_reflection_x)
+reflection_yx = np.array([[0, 1], [1, 0]])
+point_reflection_yx = np.dot(reflection_yx, point)
+print("After reflection through the line y = x:", point_reflection_yx)
+scaling_x = np.array([[2, 0], [0, 1]])
+point_scaling_x = np.dot(scaling_x, point)
+print("After scaling in X Coordinate by factor 2:", point_scaling_x)
+scaling_y = np.array([[1, 0], [0, 1.5]])
+point_scaling_y = np.dot(scaling_y, point)
+print("After scaling in Y Coordinate by factor 1.5:", point_scaling_y)ntax:
+
+

@@ -1,0 +1,70 @@
+#1a
+import numpy as np 
+import matplotlib.pyplot as plt 
+x = np.linspace(-5 * np.pi, 5 * np.pi, 500) 
+y = np.log(x**2) + np.sin(x) 
+plt.plot(x, y) 
+plt.xlabel('x-axis Label') # Label for x-axis 
+plt.ylabel('y-axis Label') # Label for y-axis 
+plt.title('2D Plot of y = log(x^2) + sin(x)') # Title of the plot 
+plt.show()
+
+#1c
+import numpy as np
+import matplotlib.pyplot as plt
+x = np.linspace(-5, 5, 500)
+y = x * np.sin(1 / x**2)
+plt.plot(x, y, label='y = x * sin(1/x^2)')
+plt.xlabel('x-axis Label') # Label for x-axis
+plt.ylabel('y-axis Label') # Label for y-axis
+plt.title('2D Plot of y = x * sin(1/x^2)') # Title of the plot
+plt.legend(loc='lower right') # Legend in lower-right corner
+plt.show()
+
+#2b
+import numpy as np
+P = np.array([3, 6])
+a = 1 # Coefficient of x in the line equation
+b = -2 # Coefficient of y in the line equation
+c = 4 # Constant term in the line equation
+dist = abs(a * P[0] + b * P[1] + c) / np.sqrt(a**2 + b**2)
+reflected_x = P[0] - 2 * a * dist / (a**2 + b**2)
+reflected_y = P[1] - 2 * b * dist / (a**2 + b**2)
+reflected_P = np.array([reflected_x, reflected_y])
+print("Reflected Point: ({:.2f}, {:.2f})".format(reflected_P[0], reflected_P[1]))
+
+#2c
+import numpy as np
+A = np.array([0, 0])
+B = np.array([5, 0])
+C = np.array([3, 3])
+AB = np.linalg.norm(B - A)
+BC = np.linalg.norm(C - B)
+CA = np.linalg.norm(A - C)
+s = (AB + BC + CA) / 2
+area = np.sqrt(s * (s - AB) * (s - BC) * (s - CA))
+perimeter = AB + BC + CA
+print("Triangle ABC:")
+print("Side AB:", AB)
+print("Side BC:", BC)
+print("Side CA:", CA)
+print("Area:", area)
+print("Perimeter:", perimeter)
+
+#3a1
+from pulp import *
+prob = LpProblem("Maximization Problem", LpMaximize)
+x = LpVariable("x", lowBound=0)
+y = LpVariable("y", lowBound=0)
+prob += x + y, "Objective Function"
+prob += x + y <= 11, "Constraint 1"
+prob += x >= 6, "Constraint 2"
+prob += y >= 6, "Constraint 3"
+prob.solve()
+print("Status: ", LpStatus[prob.status])
+print("Optimal Solution:")
+print("x = ", value(x))
+print("y = ", value(y))
+print("Max Z = ", value(prob.objective))
+
+

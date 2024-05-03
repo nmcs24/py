@@ -1,0 +1,83 @@
+#1b
+import matplotlib.pyplot as plt
+import numpy as np
+def func(x):
+ return 2 * x**2 - 4 * x + 5
+x = np.linspace(-10, 10, 500)
+y = func(x)
+plt.plot(x, y, 'm--', label='2x^2 - 4x + 5')
+plt.xlim(-10, 10)
+plt.ylim(y.min(), y.max())
+plt.legend()
+plt.title('Graph of 2x^2 - 4x + 5')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.show()
+
+#2a
+import numpy as np
+start = -22
+end = 22
+num_subintervals = 80
+step = (end - start) / num_subintervals
+x = np.arange(start, end + step, step)
+print(x)
+
+#2b
+import numpy as np
+A = np.array([1, 2])
+B = np.array([2, -2])
+C = np.array([-1, 2])
+theta = np.deg2rad(90)
+rotation_matrix=np.array([[np.cos(theta),-np.sin(theta)],[np.sin(theta), 
+np.cos(theta)]]) 
+A_rotated = np.dot(rotation_matrix, A)
+B_rotated = np.dot(rotation_matrix, B)
+C_rotated = np.dot(rotation_matrix, C)
+print("Original Triangle ABC:")
+print("A:", A)
+print("B:", B)
+print("C:", C)
+print("\nRotated Triangle ABC (90 degrees counterclockwise):")
+print("A_rotated:", A_rotated)
+print("B_rotated:", B_rotated)
+print("C_rotated:", C_rotated)
+
+
+#3a1
+from pulp import LpMaximize, LpProblem, LpVariable, lpSum, value
+prob = LpProblem("Linear Programming Problem", LpMaximize)
+x = LpVariable('x', lowBound=0, cat='Continuous')
+y = LpVariable('y', lowBound=0, cat='Continuous')
+prob += 2*x + 3*y, "Z"
+prob += 5*x - y >= 0, "Constraint1"
+prob += x + y >= 6, "Constraint2"
+prob.solve()
+if prob.status == 1:
+ x_opt = value(x)
+ y_opt = value(y)
+ z_opt = value(prob.objective)
+ print("Optimal value of x: {:.2f}".format(x_opt))
+ print("Optimal value of y: {:.2f}".format(y_opt))
+ print("Optimal value of Z: {:.2f}".format(z_opt))
+else:
+ print("Linear programming problem failed to converge.")
+
+#3b1
+import numpy as np
+A = np.array([3, 2])
+B = np.array([2, -3])
+R = np.array([[0, -1], [1, 0]])
+S = np.array([[1, 0], [0, 5]])
+F = np.array([[-1, 0], [0, -1]])
+T = F @ S @ R
+A_new = T @ A
+B_new = T @ B
+print("Line segment before transformation:")
+print("A:", A)
+print("B:", B)
+print("\nCombined transformation matrix:")
+print(T)
+print("\nLine segment after transformation:")
+print("A':", A_new)
+print("B':", B_new)
